@@ -1,0 +1,45 @@
+﻿@model Giropescando.Models.Cards
+
+<h2 id="titolo-dettagli" class="text-center">@Model.Titolo</h2>
+
+<div class="row">
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <img src="~/Content/assets/@Model.Immagine" alt="@Model.Titolo" class="custom-card-image" style="max-width: 100%; height: auto;" />
+    </div>
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <div class="custom-map-container">
+            <iframe class="custom-map" src="https://www.google.com/maps/embed?pb=@Model.MapUrl" style="border:0; width: 500px; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>@Model.RaccontoCompleto</p>
+    </div>
+</div>
+<script>$(document).ready(function () {
+        function updatePadding() {
+            var headerHeight = $('.navbar-container').outerHeight(); // ottieni l'altezza del header
+            $('#titolo-dettagli').css('padding-top', headerHeight + 'px'); // imposta il padding superiore di #titolo-dettagli
+        }
+
+        // Aggiorna il padding quando la pagina viene caricata
+        updatePadding();
+
+        // Aggiorna il padding ogni volta che la dimensione della finestra cambia
+        $(window).resize(updatePadding);
+    });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+

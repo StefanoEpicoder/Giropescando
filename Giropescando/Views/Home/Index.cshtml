@@ -1,0 +1,438 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="ChiSono">
+    <div id="target"></div>
+    <h2 data-aos="fade-down">CHI SONO</h2>
+    <p data-aos="zoom-in-left">
+        Sono un pescatore che ha deciso di condividere la sua passione con il mondo. Se vuoi imparare a pescare o
+        semplicemente vuoi passare una giornata in compagnia, contattami e prenota la tua sessione. Nato a Palermo nel
+        1987, ho iniziato a muovere i primi passi nel mondo della pesca a soli 5 anni. Mio papà era solito portarmi al
+        lago, inizialmente era un gioco per me, ma col tempo, si trasformò in una vera e propria passione. La svolta
+        avvenne quando mio cugino, più grande di me di 11 anni, che trascorreva le vacanze estive a Palermo, si presentò
+        con una canna a mulinello diversa dalle altre alla cui estremità era legato un pesciolino finto. Mi spiegò che
+        si trattava di un'esca artificiale e che con quella si potevano pescare i predatori. A Torino, dove viveva,
+        aveva imparato a pescare in questo modo e mi disse che lui, lassù ci pescava le trote. Ad ascoltare quei
+        racconti mi si aprì un mondo, non sapevo che si potesse pescare in quel modo. Da quel momento iniziai a vedere
+        la pesca sotto una luce differente, ero io il predatore e la cosa mi affascinava. Iniziai a leggere libri dei
+        grandi pescatori che a metà degli anni 90 scrissero la storia in Italia e all'estero, come Silvio Smania, il mio
+        riferimento in assoluto, e a guardare i video di pesca sportiva che in quel periodo iniziavano a diffondersi in
+        vhs. Iniziai a frequentare i negozi di pesca e a comprare le riviste specializzate. Piano piano affinai la
+        tecnica e iniziai a pescare i predatori, prima in acqua dolce e poi in mare.
+    </p>
+    <script>
+        $(document).ready(function () {
+            function updateTargetOffset() {
+                var headerHeight = $('.navbar-container').outerHeight(); // ottieni l'altezza del header
+                $('#target').css('height', headerHeight + 'px'); // imposta l'altezza di #target
+                $('#target').css('margin-top', '-' + headerHeight + 'px'); // imposta il margine superiore di #target
+            }
+
+            // Aggiorna l'offset quando la pagina viene caricata
+            updateTargetOffset();
+
+            // Aggiorna l'offset ogni volta che la dimensione della finestra cambia
+            $(window).on('resize scroll', updateTargetOffset);
+        });
+
+    </script>
+</section>
+<hr />
+
+<section id="LeMieCatture" class="LeMieCatture">
+    <h2 class="Gallery" data-aos="fade-left">GALLERIA FOTO</h2>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_1.jpg" alt="Image 1" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_2.jpg" alt="Image 2" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_3.jpg" alt="Image 3" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_4.jpg" alt="Image 4" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_5.jpg" alt="Image 5" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_6.jpg" alt="Image 6" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_7.jpg" alt="Image 7" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_8.jpg" alt="Image 8" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_9.jpg" alt="Image 9" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_10.jpg" alt="Image 10" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_11.jpg" alt="Image 11" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_12.jpg" alt="Image 12" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_13.jpg" alt="Image 13" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_14.jpg" alt="Image 14" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_15.jpg" alt="Image 15" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_16.jpg" alt="Image 16" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_17.jpg" alt="Image 17" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_18.jpg" alt="Image 18" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_19.jpg" alt="Image 19" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_20.jpg" alt="Image 20" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_21.jpg" alt="Image 21" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_22.jpg" alt="Image 22" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_23.jpg" alt="Image 23" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_24.jpg" alt="Image 24" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_25.jpg" alt="Image 25" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_26.jpg" alt="Image 26" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_27.jpg" alt="Image 27" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_28.jpg" alt="Image 28" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_29.jpg" alt="Image 29" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_30.jpg" alt="Image 30" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_31.jpg" alt="Image 31" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_32.jpg" alt="Image 32" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_33.jpg" alt="Image 33" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_34.jpg" alt="Image 34" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_35.jpg" alt="Image 35" class="img-fluid" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_36.jpg" alt="Image 36" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_37.jpg" alt="Image 37" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_38.jpg" alt="Image 38" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_39.jpg" alt="Image 39" class="img-fluid" />
+        </div>
+        <div class="col-6 col-md-2">
+            <img src="~/Content/assets/foto_galleria_40.jpg" alt="Image 40" class="img-fluid" />
+        </div>
+    </div>
+</section>
+<hr />
+<section id="LeMieCattureVideo" class="LeMieCatture">
+    <h2 class="Gallery">GALLERIA VIDEO</h2>
+    <div class="row d-flex flex-wrap justify-content-around">
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-4">
+                <div id="player1" class="embed-responsive-item"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-4">
+                <div id="player2" class="embed-responsive-item"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-4">
+                <div id="player3" class="embed-responsive-item"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-4">
+                <div id="player4" class="embed-responsive-item"></div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-4">
+                <div id="player5" class="embed-responsive-item"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr />
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+<!--SCRIPT PER GESTIRE LA SEZIONE FOTOGRAFIA( IMMAGINE AL CENTRO, TRANSIZIONI ECC ECC)-->
+<script>
+    $(document).ready(function () {
+        var isZoomed = false;
+        var originalPosition = null;
+        var zoomedImage = null;
+
+        // Aggiungi un div di overlay all'inizio del body
+        $("body").prepend(
+            "<div id='overlay' style='display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 9998;'></div>"
+        );
+
+        $(".col-md-2 img").click(function () {
+            if (isZoomed) {
+                if (this !== zoomedImage) {
+                    return;
+                }
+                // Nascondi l'overlay con un effetto di dissolvenza
+                $("#overlay").fadeOut(500);
+                $(this)
+                    .animate(
+                        {
+                            top: originalPosition.top,
+                            left: originalPosition.left,
+                            width: originalPosition.width,
+                            height: originalPosition.height,
+                            opacity: 0,
+                        },
+                        500,
+                        function () {
+                            $(this).css({
+                                position: "",
+                                top: "",
+                                left: "",
+                                transform: "",
+                                border: "",
+                                maxWidth: "",
+                                maxHeight: "",
+                                objectFit: "",
+                                zIndex: "",
+                            });
+                            $(this).removeAttr("style");
+                            $(".col-md-2 img").removeClass("blurred");
+                            isZoomed = false;
+                            zoomedImage = null;
+                        }
+                    )
+                    .animate({ opacity: 1 }, 500);
+            } else {
+                originalPosition = $(this).offset();
+                originalPosition.width = $(this).width();
+                originalPosition.height = $(this).height();
+
+                $(".col-md-2 img").addClass("blurred").css({
+                    position: "",
+                    transform: "",
+                    border: "",
+                    maxWidth: "",
+                    maxHeight: "",
+                    objectFit: "",
+                    zIndex: "",
+                });
+                $(this)
+                    .removeClass("blurred")
+                    .css({
+                        position: "fixed",
+                        top: originalPosition.top,
+                        left: originalPosition.left,
+                        opacity: 0,
+                    })
+                    .animate(
+                        {
+                            top: "50%",
+                            left: "50%",
+                            opacity: 1,
+                        },
+                        500
+                    )
+                    .css({
+                        transform: "translate(-50%, -50%) scale(1.2)",
+                        border: "5px solid #e38c0a",
+                        maxWidth: "70%",
+                        maxHeight: "70%",
+                        objectFit: "contain",
+                        zIndex: 9999,
+                    });
+                isZoomed = true;
+                zoomedImage = this;
+                // Mostra l'overlay con un effetto di dissolvenza
+                $("#overlay").fadeIn(500);
+            }
+        });
+
+        $(".col-md-2 img").hover(
+            function () {
+                if (isZoomed) {
+                    return;
+                }
+                $(this).css({
+                    transform: "scale(1.2)",
+                });
+            },
+            function () {
+                if (isZoomed) {
+                    return;
+                }
+                $(this).css({
+                    transform: "",
+                });
+            }
+        );
+    });
+</script>
+<script>
+    window.onload = function () {
+        // Seleziona tutte le immagini nella galleria
+        var immagini = document.querySelectorAll(".LeMieCatture img");
+
+        // Estrai gli attributi src e alt in un array
+        var attributiImmagini = Array.from(immagini, (img) => ({ src: img.src, alt: img.alt }));
+
+        // Mescola l'array
+        attributiImmagini.sort(() => Math.random() - 0.5);
+
+        // Riassegna gli attributi src e alt dall'array mescolato
+        for (let i = 0; i < immagini.length; i++) {
+            immagini[i].src = attributiImmagini[i].src;
+            immagini[i].alt = attributiImmagini[i].alt;
+        }
+    };
+</script>
+
+<!--SCRIPT PER GESTIRE LA SEZIONE VIDEO-->
+<script>
+    // 1. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 2. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var players = [];
+    function onYouTubeIframeAPIReady() {
+        players[0] = new YT.Player("player1", {
+            height: "315",
+            width: "560",
+            videoId: "Ka7znXy2OeI",
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+        players[1] = new YT.Player("player2", {
+            height: "315",
+            width: "560",
+            videoId: "Zxfx6V5ySwA",
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+        players[2] = new YT.Player("player3", {
+            height: "315",
+            width: "560",
+            videoId: "UwpX8K3hS1Q",
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+        players[3] = new YT.Player("player4", {
+            height: "315",
+            width: "560",
+            videoId: "1sgCyuW_2sI",
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+        players[4] = new YT.Player("player5", {
+            height: "315",
+            width: "560",
+            videoId: "cBrsPMw-t5U",
+            events: {
+                onStateChange: onPlayerStateChange,
+            },
+        });
+    }
+
+    // 3. The API calls this function when the player's state changes.
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            // The video started playing
+            var playerElement = document.getElementById(event.target.a.id);
+            playerElement.style.position = "fixed";
+            playerElement.style.top = "50%";
+            playerElement.style.left = "50%";
+            playerElement.style.transform = "translate(-50%, -50%)";
+            playerElement.style.zIndex = "1000";
+        }
+    }
+</script>
+<!--SCRIPT PER GESTIRE lo scrolling della pagina alla sezione CHI SONO-->
+<script>
+    $('a[href^="#"]').on('click', function (event) {
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top - $('#ChiSono').height() // considera l'offset della navbar
+            }, 1000);
+        }
+    });
+</script>
+
+<script>
+    $('a[href^="#"]').on('click', function (event) {
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+            event.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top - $('.navbar').height() // sostituisci '.navbar' con la classe o l'ID della tua navbar
+            }, 1000);
+        }
+    });
+</script>

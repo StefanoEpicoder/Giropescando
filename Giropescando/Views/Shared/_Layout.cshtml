@@ -1,0 +1,260 @@
+﻿@using Giropescando.Models
+
+<!DOC
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="~/Content/assets/png_giropescando_copia_copia_copia-removebg.png" type="image/x-icon">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIROPESCANDO</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    @{
+        ViewBag.Title = "Home Page";
+    }
+
+    @if (TempData["ToastMessage"] != null)
+    {
+        <div class="alert alert-@TempData["ToastType"]" role="alert" style="position: fixed; top: 20px; right: 20px;">
+            @TempData["ToastMessage"]
+        </div>
+    }
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-lg">
+            <img src="~/Content/assets/png_giropescando_copia_copia_copia-removebg.png" class="logo" alt="Logo" />
+            <h2 class="titolo">Giropescando</h2>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent"
+                    aria-controls="navbarContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Aggiungi la classe 'nav-item' a ciascuno dei tuoi link -->
+                @if (User.Identity.IsAuthenticated)
+                {
+                    // Se l'utente è autenticato, mostra il pulsante "Logout" che reindirizza all'azione "LogOut" del controller "Login"
+                    <a id="logoutButton" href="@Url.Action("LogOut", "Login")" class="btn btn-primary nav-item logout-btn">Logout</a>
+                    <span class="navbar-text logged-in-user">Utente loggato: @User.Identity.Name</span>
+
+                }
+                else
+                {
+                    // Se l'utente non è autenticato, mostra il pulsante "Login" che apre il modale di login
+                    <a href="@Url.Action("Login", "Login", new { ReturnUrl = Request.RawUrl })" class="btn btn-primary nav-item" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                }
+
+                <a href="https://www.youtube.com/stefano9787" target="_blank" class="nav-item">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+                <a href="https://www.instagram.com/giropescando/" target="_blank" class="nav-item">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://m.facebook.com/Giropescando-101940124655898/posts/?ref=page_internal&locale=ur_PK"
+                   target="_blank"
+                   class="nav-item">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://wa.me/+39351593492?text=Ciao%20Stefano,%20sono%20interessato%20alle%20tue%20lezioni."
+                   target="_blank"
+                   class="nav-item">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="@Url.Action("Index", "Home")#target" class="nav-item WhoAmI">
+                    @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "dettagli" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "racconti_di_pesca")
+                    {
+                        @:Home
+                    }
+                    else
+                    {
+                        @:Chi sono
+                    }
+                </a>
+
+                @if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "racconti_di_pesca" && ViewContext.RouteData.Values["action"].ToString().ToLower() != "dettagli")
+                {
+                    <a href="#LeMieCatture" class="nav-item Galleria">Galleria foto</a>
+                    <a href="#LeMieCattureVideo" class="nav-item Video">Galleria video</a>
+                }
+
+
+                <a href="@Url.Action("Index", "Articolo")" class="nav-item Blog">Blog</a> <!-- Aggiungi questa linea -->
+
+                <a href="@Url.Action("Racconti_di_pesca", "Home")" class="nav-item Racconti">Racconti di pesca</a>
+                <a href="corsi.html" class="nav-item Corsi">I miei corsi</a>
+
+                <a href="giornataPesca.html" class="nav-item GiornataPesca">Una giornata di pesca  insieme</a>
+                <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+                <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+                <a href=""
+                   class="nav-item PrenotaLezione"
+                   onclick="Calendly.initPopupWidget({url: 'https://calendly.com/dantonistefano/lezione-di-pesca'});return false;">Prenota la tua lezione</a>
+            </div>
+        </nav>
+    </div>
+    <br />
+    @if (ViewBag.HideCarousel == null || !(bool)ViewBag.HideCarousel)
+    {
+        <section class="Carosello">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/Content/assets/background2.jpg" class="d-block w-100" alt="Image 1" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Content/assets/background3.jpg" class="d-block w-100" alt="Image 2" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Content/assets/carosello3.jpeg" class="d-block w-100" alt="Image 3" />
+                    </div>
+                </div>
+                <button class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+    }
+    <hr />
+    @RenderBody()
+
+
+    @if (TempData["ToastMessage"] != null)
+    {
+        <script>
+        Swal.fire({
+            icon: '@TempData["ToastType"]',
+            title: '@TempData["ToastMessage"]',
+            showConfirmButton: false,
+            timer: 5000
+        });
+        </script>
+    }
+
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if (ViewBag.LoginModel is LoginViewModel loginModel)
+                    {
+                        @Html.Partial("~/Views/Shared/_LoginPartial.cshtml", loginModel)
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#loginForm").submit(function (event) {
+                event.preventDefault();
+
+                var username = $("#Username").val();
+                var password = $("#Password").val();
+
+                $.post("/Login/Login", { Username: username, Password: password })
+                    .done(function (data) {
+                        if (data.success) {
+                            // Login effettuato con successo
+                            // Reindirizza l'utente alla pagina 'Index'
+                            window.location.href = "/Index";
+                        } else {
+                            // Login fallito
+                            // Mostra il messaggio di errore all'utente
+                            alert("Username o password non corretti");
+                        }
+                    });
+            });
+        });
+    </script>
+
+    <script>
+$(document).ready(function() {
+    if ('@User.Identity.IsAuthenticated') {
+        $('.logout-btn').addClass('ms-auto');
+    }
+});
+    </script>
+
+    @RenderSection("Scripts", required: false)
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init();
+        });
+    </script>
+
+    <script>
+$(document).ready(function() {
+    if ('@User.Identity.IsAuthenticated') {
+        $('#logoutButton').appendTo('#navbarContent');
+    }
+});
+    </script>
+    <script>
+$(document).ready(function() {
+    if ('@User.Identity.IsAuthenticated') {
+        $('#logoutButton').appendTo('#navbarContent');
+    }
+});
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Apri il modale quando si fa clic sul pulsante 'Login'
+            $('[data-bs-target="#loginModal"]').click(function () {
+                $('#loginModal').modal('show');
+            });
+        });
+    </script>
+
+
+</body>
+</html>

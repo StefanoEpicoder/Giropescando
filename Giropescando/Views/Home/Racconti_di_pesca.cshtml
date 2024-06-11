@@ -1,0 +1,61 @@
+﻿@model Giropescando.Models.MyViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="LeMieAvventureDiPesca">
+    <h2>Le mie avventure di pesca</h2>
+    <p>
+        Da quando ero piccolo, ho sempre trascorso molto tempo a pesca. Questo mi ha permesso di imparare molto sulla
+        pesca e di sviluppare una grande passione per essa. Oggi sono un pescatore esperto e mi piace condividere le
+        mie avventure di pesca con gli altri. In questo blog condividerò con voi alcune delle mie storie di pesca
+        preferite e vi darò alcuni consigli su come pescare con successo. Spero che le mie storie vi ispirino e vi
+        aiutino a diventare pescatori migliori. Buona lettura!
+    </p>
+</section>
+<hr />
+
+<section id="Storie">
+    <div class="container">
+        <div class="row">
+            @if (Model.Cards != null && Model.Cards.Any())
+            {
+                foreach (var card in Model.Cards)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <img src="~/Content/assets/@card.Immagine" class="card-img-top" alt="@card.Titolo" />
+                            <div class="card-body">
+                                <h5 class="card-title">@card.Titolo</h5>
+                                <p class="card-text">@card.Contenuto</p>
+                                <a href="@Url.Action("Dettagli", "Home", new { id = card.IdCard })#titolo-dettagli" class="btn btn-primary">Leggi di più</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>Nessuna card disponibile.</div>
+            }
+        </div>
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var headerHeight = $('.navbar').outerHeight(); // Sostituisci '.navbar' con il selettore del tuo header o navbar
+            $('html, body').animate({
+                scrollTop: $("#LeMieAvventureDiPesca").offset().top - headerHeight
+            }, 2000);
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
