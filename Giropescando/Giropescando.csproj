@@ -177,15 +177,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\COMMENTO.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MI_PIACE.cs" />
     <Compile Include="Models\ModelDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Cards.cs" />
     <Compile Include="Models\Connessioni.cs" />
     <Compile Include="Models\MyViewModel.cs" />
+    <Compile Include="Models\POST.cs" />
     <Compile Include="Models\Ruoli.cs" />
     <Compile Include="Models\USER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -290,6 +294,8 @@
     <Content Include="Views\Home\Corsi.cshtml" />
     <Content Include="Views\Home\Dettagli.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
+    <Content Include="Views\Post\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

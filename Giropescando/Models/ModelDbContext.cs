@@ -13,14 +13,18 @@ namespace Giropescando.Models
         {
         }
 
+        public ModelDbContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+        }
+
         public DbSet<Cards> Cards { get; set; }
         public DbSet<USER> USER { get; set; }
-
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Commento> Commenti { get; set; }
+        public DbSet<MiPiace> MiPiace { get; set; }
 
         public DbSet<IdentityUserLogin> IdentityUserLogins { get; set; }
         public DbSet<IdentityUserRole> IdentityUserRoles { get; set; }
-
     }
-
 }
 

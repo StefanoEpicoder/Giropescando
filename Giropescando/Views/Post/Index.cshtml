@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Giropescando.Models.Post>
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Crea un nuovo post", "Create", "Post", null, new { @class = "btn btn-primary" })
+    </p>
+}
+<div class="row2">
+    @foreach (var post in Model)
+    {
+        <div class="col-md-12">
+            <div class="post-card mb-4">
+                <div class="post-card-body">
+                    <p class="post-card-text text-left"><small class="text-muted">Postato da: @Html.DisplayFor(modelItem => post.NomeAutore) il @post.DataPubblicazione.ToShortDateString()</small></p>
+                    @if (post.Immagine != null)
+                    {
+                        var base64 = Convert.ToBase64String(post.Immagine);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        <img class="post-card-img-top post-image" src="@imgSrc" alt="Card image cap" />
+                    }
+                    <h5 class="post-card-title">@Html.DisplayFor(modelItem => post.Titolo)</h5>
+                    <p class="post-card-text">@Html.DisplayFor(modelItem => post.Contenuto)</p>
+                </div>
+
+                <div class="post-actions d-flex justify-content-center align-items-center">
+                    @using (Html.BeginForm("AggiungiMiPiace", "Post", new { idPost = post.IdPost }, FormMethod.Post, new { @class = "miPiaceForm d-flex align-items-center justify-content-center mr-2" }))
+                    {
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-thumbs-up"></i> Mi piace <span id="miPiaceCount_@post.IdPost">@ViewBag.MiPiaceCounts[post.IdPost]</span>
+                        </button>
+                    }
+                    @using (Html.BeginForm("CreaCommento", "Post", FormMethod.Post, new { @class = "d-flex align-items-center" }))
+                    {
+                        @Html.Hidden("idPost", post.IdPost)
+                        @Html.TextArea("contenuto", new { placeholder = "Scrivi un commento...", @class = "form-control mr-2" })
+                        <input type="submit" value="Pubblica" class="btn btn-primary" />
+                    }
+                </div>
+
+                <div class="post-card-footer">
+                    <h5>Commenti</h5>
+                    @foreach (var commento in post.Commenti)
+                    {
+                        <div class="commento">
+                            <div class="commento-container">
+                                <p><strong>@Html.DisplayFor(modelItem => commento.User.Nome)</strong> ha commentato: @Html.DisplayFor(modelItem => commento.Contenuto)</p>
+                                <p>@commento.DataPubblicazione.ToShortDateString()</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(document).on('submit', 'form.miPiaceForm', function (event) {
+            event.preventDefault(); // Previene il comportamento predefinito del form
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: form.serialize(), // Invia i dati del form al server
+                success: function (data) {
+                    // Aggiorna il conteggio dei "Mi piace" senza ricaricare la pagina
+                    $('#miPiaceCount_' + data.idPost).text(data.miPiaceCount);
+
+                    // Cambia l'icona del "Mi piace"
+                    var icon = form.find('i');
+                    if (icon.hasClass('fas')) {
+                        icon.removeClass('fas').addClass('far');
+                    } else {
+                        icon.removeClass('far').addClass('fas');
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -90,7 +90,7 @@
                     <i class="fab fa-whatsapp"></i>
                 </a>
                 <a href="@Url.Action("Index", "Home")#target" class="nav-item WhoAmI">
-                    @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "dettagli" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "racconti_di_pesca")
+                    @if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "dettagli" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "racconti_di_pesca" || ViewContext.RouteData.Values["action"].ToString().ToLower() == "index" && ViewContext.RouteData.Values["controller"].ToString().ToLower() == "post")
                     {
                         @:Home
                     }
@@ -100,19 +100,16 @@
                     }
                 </a>
 
-                @if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "racconti_di_pesca" && ViewContext.RouteData.Values["action"].ToString().ToLower() != "dettagli")
+                @if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "racconti_di_pesca" && ViewContext.RouteData.Values["action"].ToString().ToLower() != "dettagli" && !(ViewContext.RouteData.Values["action"].ToString().ToLower() == "index" && ViewContext.RouteData.Values["controller"].ToString().ToLower() == "post"))
                 {
                     <a href="#LeMieCatture" class="nav-item Galleria">Galleria foto</a>
                     <a href="#LeMieCattureVideo" class="nav-item Video">Galleria video</a>
                 }
 
-
-                <a href="@Url.Action("Index", "Articolo")" class="nav-item Blog">Blog</a> <!-- Aggiungi questa linea -->
+                <a href="@Url.Action("Index", "Post")" class="nav-item Post">Visualizza i post</a>
 
                 <a href="@Url.Action("Racconti_di_pesca", "Home")" class="nav-item Racconti">Racconti di pesca</a>
-                <a href="corsi.html" class="nav-item Corsi">I miei corsi</a>
 
-                <a href="giornataPesca.html" class="nav-item GiornataPesca">Una giornata di pesca  insieme</a>
                 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
                 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
                 <a href=""

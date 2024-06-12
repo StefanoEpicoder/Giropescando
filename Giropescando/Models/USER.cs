@@ -17,6 +17,9 @@ namespace Giropescando.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USER()
         {
+            Posts = new HashSet<Post>();
+            Commenti = new HashSet<Commento>();
+            MiPiace = new HashSet<MiPiace>();
         }
 
         [Key]
@@ -50,11 +53,9 @@ namespace Giropescando.Models
         [Display(Name = "Città")]
         public string Citta { get; set; }
 
-        // Attributi di validazione per la provincia
         [StringLength(3, MinimumLength = 2, ErrorMessage = "Inserire Sigla Provincia")]
         [Display(Name = "Provincia")]
         public string Prov { get; set; }
-
 
         [Display(Name = "Indirizzo")]
         public string Indirizzo { get; set; }
@@ -62,12 +63,17 @@ namespace Giropescando.Models
         [Display(Name = "Telefono")]
         public string Tel_Cell { get; set; }
 
-        // Attributi di validazione per l'indirizzo email
         [EmailAddress(ErrorMessage = "Inserire indirizzo e-mail valido")]
         [Display(Name = "E-mail")]
         public string email { get; set; }
 
-    
+        // Relazioni con le altre tabelle
+        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Commento> Commenti { get; set; }
+        public virtual ICollection<MiPiace> MiPiace { get; set; }
+
+
+
 
 
 

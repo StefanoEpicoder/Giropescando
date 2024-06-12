@@ -118,6 +118,13 @@
     color: #e38c0a;
 }
 
+.Post{
+    text-decoration: none;
+    margin: 10px;
+    font-family: cursive;
+    color: #e38c0a;
+}
+
 .right a {
     color: #333;
     text-decoration: none;
@@ -342,7 +349,80 @@ p {
     font-family: cursive;
 }
 
+/*STILE PER LA SEZIONE POST IN INDEX*/
 
+.post-card {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    max-width: 600px; /* Aggiunto per limitare la larghezza massima della card */
+    margin: 0 auto; /* Centra la card orizzontalmente */
+}
+
+.post-card-img-top {
+    width: 100%;
+    height: auto;
+    border-radius:20px;
+}
+
+.post-card-body {
+    padding: 15px;
+}
+
+.post-card-title {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.post-card-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.post-card-footer {
+    background-color: #f6f7f9;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+}
+
+.commento {
+    margin-bottom: 10px;
+}
+
+    .commento p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+.post-actions {
+    margin-top: 10px;
+}
+
+
+
+.commento-container {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+
+
+.post-card {
+    border-radius: 20px; /* Aumenta questo valore per rendere le card più arrotondate */
+}
+
+.autore-post {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
 
 
     /*TRANSIZIONI VARI ELEMENTI DELLA PAGINA AL CARICAMENTO DELLA STESSA*/
