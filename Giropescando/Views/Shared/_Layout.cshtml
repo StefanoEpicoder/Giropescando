@@ -30,6 +30,7 @@
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
 </head>
 <body>
     @{
@@ -70,7 +71,10 @@
                 {
                     // Se l'utente non è autenticato, mostra il pulsante "Login" che apre il modale di login
                     <a href="@Url.Action("Login", "Login", new { ReturnUrl = Request.RawUrl })" class="btn btn-primary nav-item" id="loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    // Aggiungi qui il pulsante "Sign In"
+                    <button class="btn btn-secondary nav-item" data-bs-toggle="modal" data-bs-target="#RegistraUtenteModal">Sign In</button>
                 }
+
 
                 <a href="https://www.youtube.com/stefano9787" target="_blank" class="nav-item">
                     <i class="fab fa-youtube"></i>
@@ -114,7 +118,7 @@
                 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
                 <a href=""
                    class="nav-item PrenotaLezione"
-                   onclick="Calendly.initPopupWidget({url: 'https://calendly.com/dantonistefano/lezione-di-pesca'});return false;">Prenota la tua lezione</a>
+                   onclick="Calendly.initPopupWidget({url: 'https://calendly.com/dantonistefano/consulenza'});return false;">Prenota la tua lezione</a>
             </div>
         </nav>
     </div>
@@ -185,9 +189,18 @@
             </div>
         </div>
     </div>
+    @Html.Partial("RegistraUtenteModal", new Giropescando.Models.REGISTRAZIONE())
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
     <script>
         $(document).ready(function () {
             $("#loginForm").submit(function (event) {
@@ -235,13 +248,7 @@ $(document).ready(function() {
     }
 });
     </script>
-    <script>
-$(document).ready(function() {
-    if ('@User.Identity.IsAuthenticated') {
-        $('#logoutButton').appendTo('#navbarContent');
-    }
-});
-    </script>
+
 
     <script>
         $(document).ready(function () {

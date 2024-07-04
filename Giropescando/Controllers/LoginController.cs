@@ -1,20 +1,26 @@
 ﻿using Giropescando.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Giropescando.Controllers
 {
     public class LoginController : Controller
     {
+        private ModelDbContext _context;
+
+        public LoginController()
+        {
+            _context = new ModelDbContext();
+        }
+
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            // Memorizza l'URL di ritorno come un parametro del metodo
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -29,12 +35,15 @@ namespace Giropescando.Controllers
                 return View();
             }
 
-            if (USER.Autenticato(u.Username, u.Pass))
+            // Rimuovi l'hashing della password e confronta direttamente la password in chiaro
+            var authenticatedUser = _context.USER.FirstOrDefault(dbUser => dbUser.Username == u.Username && dbUser.Pass == u.Pass);
+
+            if (authenticatedUser != null)
             {
-                var userData = u.IdUser.ToString();
+                var userData = authenticatedUser.IdUser.ToString();
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
                     1,
-                    u.Username,
+                    authenticatedUser.Username,
                     DateTime.Now,
                     DateTime.Now.AddMinutes(30),
                     false,
@@ -46,16 +55,15 @@ namespace Giropescando.Controllers
                 Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
 
                 TempData["ToastType"] = "success";
-                TempData["ToastMessage"] = "Benvenuto, " + u.Username + "!";
+                TempData["ToastMessage"] = "Benvenuto, " + authenticatedUser.Username + "!";
 
-                // Reindirizza l'utente alla pagina "Articolo"
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 TempData["ToastType"] = "error";
                 TempData["ToastMessage"] = "Username o password non corretti";
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -74,7 +82,7 @@ namespace Giropescando.Controllers
             return PartialView("~/Views/Shared/LoginPartial.cshtml");
         }
     }
-
 }
+
 
 

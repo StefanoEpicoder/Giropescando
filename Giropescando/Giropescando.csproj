@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\RegistrazioneController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +191,7 @@
     <Compile Include="Models\Connessioni.cs" />
     <Compile Include="Models\MyViewModel.cs" />
     <Compile Include="Models\POST.cs" />
+    <Compile Include="Models\REGISTRAZIONE.cs" />
     <Compile Include="Models\Ruoli.cs" />
     <Compile Include="Models\USER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -296,9 +298,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Shared\RegistraUtenteModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Registrazione\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

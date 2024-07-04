@@ -11,7 +11,7 @@ public class ApplicationUser : IdentityUser
     public int IdUser { get; internal set; }
 
     // Aggiungi questa linea
-
+    public string Ruolo { get; set; }
 
     public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
     {

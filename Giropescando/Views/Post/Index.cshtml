@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Giropescando.Models.Post>
 
-
-
 @if (User.Identity.IsAuthenticated)
 {
     <p>
@@ -26,74 +24,185 @@
                 </div>
 
                 <div class="post-actions d-flex justify-content-center align-items-center">
-                    @using (Html.BeginForm("AggiungiMiPiace", "Post", new { idPost = post.IdPost }, FormMethod.Post, new { @class = "miPiaceForm d-flex align-items-center justify-content-center mr-2" }))
+                    @using (Html.BeginForm("AggiungiMiPiace", "Post", new { idPost = post.IdPost }, FormMethod.Post, new { @class = "miPiaceForm d-flex align-items-center justify-content-center mr-2", style = "margin-right: 10px;" }))
                     {
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary ">
                             <i class="fas fa-thumbs-up"></i> Mi piace <span id="miPiaceCount_@post.IdPost">@ViewBag.MiPiaceCounts[post.IdPost]</span>
                         </button>
                     }
-                    @using (Html.BeginForm("CreaCommento", "Post", FormMethod.Post, new { @class = "d-flex align-items-center" }))
+                    @using (Html.BeginForm("CreaCommento", "Post", FormMethod.Post, new { @class = "creaCommentoForm d-flex align-items-center", data_postid = "@post.IdPost", style = "margin-left: 10px;" }))
                     {
                         @Html.Hidden("idPost", post.IdPost)
                         @Html.TextArea("contenuto", new { placeholder = "Scrivi un commento...", @class = "form-control mr-2" })
-                        <input type="submit" value="Pubblica" class="btn btn-primary" />
+                        <input type="submit" value="Pubblica" class="btn btn-primary" style="margin-left:10px" />
                     }
+
+                    @if (User.Identity.Name == post.NomeAutore)
+                    {
+                        using (Html.BeginForm("EliminaPost", "Post", FormMethod.Post, new { @class = "form-inline eliminaPostForm", style = "margin-left: 10px;" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("idPost", post.IdPost)
+                            <button type="button" class="btn btn-danger btnEliminaPost" data-idpost="@post.IdPost">Elimina</button>
+                        }
+                    }
+
                 </div>
 
                 <div class="post-card-footer">
                     <h5>Commenti</h5>
-                    @foreach (var commento in post.Commenti)
-                    {
-                        <div class="commento">
-                            <div class="commento-container">
-                                <p><strong>@Html.DisplayFor(modelItem => commento.User.Nome)</strong> ha commentato: @Html.DisplayFor(modelItem => commento.Contenuto)</p>
-                                <p>@commento.DataPubblicazione.ToShortDateString()</p>
+                    <div id="commentiPost_@post.IdPost">
+                        @foreach (var commento in post.Commenti)
+                        {
+                            <div class="commento" id="commento_@commento.IdCommento">
+                                <div class="commento-container">
+                                    <p><strong>@Html.DisplayFor(modelItem => commento.User.Nome)</strong> ha commentato: @Html.DisplayFor(modelItem => commento.Contenuto)</p>
+                                    <p>@commento.DataPubblicazione.ToShortDateString()</p>
+                                    @if (User.Identity.Name == commento.User.Nome)
+                                    {
+                                        <button type="button" class="btn btn-danger eliminaCommentoBtn" data-idcommento="@commento.IdCommento" style="margin-top: 10px;">Elimina Commento</button>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     }
 </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        $(document).on('submit', 'form.miPiaceForm', function (event) {
-            event.preventDefault(); // Previene il comportamento predefinito del form
+    // Funzione per gestire la visualizzazione degli alert
+    function mostraAlert(titolo, messaggio, tipo) {
+        swal(titolo, messaggio, tipo);
+    }
 
-            var form = $(this);
-            var url = form.attr('action');
 
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: form.serialize(), // Invia i dati del form al server
-                success: function (data) {
-                    // Aggiorna il conteggio dei "Mi piace" senza ricaricare la pagina
-                    $('#miPiaceCount_' + data.idPost).text(data.miPiaceCount);
-
-                    // Cambia l'icona del "Mi piace"
-                    var icon = form.find('i');
-                    if (icon.hasClass('fas')) {
-                        icon.removeClass('fas').addClass('far');
-                    } else {
-                        icon.removeClass('far').addClass('fas');
-                    }
+    // Gestione dei "Mi piace" in modo asincrono
+    $('form.miPiaceForm').on('submit', function (event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax({
+            type: 'POST',
+            url: form.attr('action'),
+            data: form.serialize(),
+            success: function (data) {
+                $('#miPiaceCount_' + data.idPost).text(data.miPiaceCount);
+            },
+            statusCode: {
+                401: function () {
+                    mostraAlert("Accesso Negato!", "Devi essere loggato per mettere 'Mi piace' a un post. Per favore, effettua il login.", "warning");
+                },
+                500: function () {
+                    mostraAlert("Errore!", "Si è verificato un errore interno. Riprova più tardi.", "error");
                 }
-            });
+            }
         });
     });
+
+        $(document).ready(function () {
+            $('form.creaCommentoForm').on('submit', function (event) {
+                event.preventDefault(); // Previene l'invio standard del form
+                var form = $(this);
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.reload(); // Ricarica la pagina dopo l'invio del commento
+                        } else {
+                            mostraAlert("Errore!", response.message || "Errore sconosciuto durante l'aggiunta del commento.", "error");
+                        }
+                    },
+                    error: function () {
+                        mostraAlert("Errore!", "Impossibile inviare il commento. Riprova più tardi.", "error");
+                    }
+                });
+            });
+        });
+
+        // Gestione dell'eliminazione dei post in modo asincrono
+        $('.btnEliminaPost').click(function (e) {
+            e.preventDefault();
+            var postId = $(this).data('idpost'); // Assicurati che il pulsante abbia un attributo data-idpost con l'ID del post
+
+            if (typeof postId !== 'undefined' && postId !== null) {
+                swal({
+                    title: "Sei sicuro?",
+                    text: "Una volta eliminato, non sarai in grado di recuperare questo post!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/Post/EliminaPost',
+                            type: 'POST',
+                            data: { idPost: postId },
+                            success: function (response) {
+                                if (response.success) {
+                                    swal("Il post è stato eliminato con successo!", {
+                                        icon: "success",
+                                    }).then(() => {
+                                        window.location.reload(); // Ricarica la pagina o rimuovi il post dal DOM come preferisci
+                                    });
+                                } else {
+                                    swal("Errore nell'eliminazione del post!", {
+                                        icon: "error",
+                                    });
+                                }
+                            },
+                            error: function () {
+                                swal("Errore nell'eliminazione del post!", {
+                                    icon: "error",
+                                });
+                            }
+                        });
+                    }
+                });
+            } else {
+                console.error("ID del post non trovato.");
+            }
+        });
+
+
+
+
+
+
+    // Gestione dell'eliminazione dei commenti in modo asincrono
+    // Utilizziamo l'evento 'on' su un elemento statico per gestire i click sui bottoni dinamici
+    $('.row2').on('click', '.eliminaCommentoBtn', function () {
+        var button = $(this);
+        $.ajax({
+            type: 'POST',
+            url: '/Post/EliminaCommento',
+            data: { idCommento: button.data('idcommento') },
+            success: function (response) {
+                if (response.success) {
+                    $('#commento_' + button.data('idcommento')).remove();
+                } else {
+                    mostraAlert("Errore!", response.message, "error");
+                }
+            }
+        });
+    });
+
+    // Gestione degli errori globali
+    document.addEventListener("DOMContentLoaded", function() {
+        @if (TempData.ContainsKey("ErrorMessage"))
+        {
+            <text>
+            mostraAlert("Errore!", "@Html.Raw(TempData["ErrorMessage"].ToString())", "error");
+            </text>
+        }
+    });
+});
+
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
-

@@ -35,15 +35,23 @@ namespace Giropescando.Models
             throw new NotImplementedException();
         }
 
+        // Metodo aggiornato per restituire sempre tutti i ruoli necessari
         public override string[] GetRolesForUser(string username)
         {
-            List<string> roles = new List<string>();
-            ModelDbContext db = new ModelDbContext();
-            USER user = db.USER.Where(u => u.Username == username).FirstOrDefault();
+            using (var db = new ModelDbContext()) // Assumi di avere una classe di contesto del database
+            {
+                // Trova l'utente nel database tramite username
+                var user = db.USER.FirstOrDefault(u => u.Username == username);
 
-            roles.Add(user.Ruolo);
+                if (user != null)
+                {
+                    // Restituisce il ruolo dell'utente in un array di stringhe
+                    return new string[] { user.Ruolo };
+                }
+            }
 
-            return roles.ToArray();
+            // Se l'utente non viene trovato o non ha un ruolo, restituisce un array vuoto
+            return new string[] { };
         }
 
         public override string[] GetUsersInRole(string roleName)
@@ -53,8 +61,13 @@ namespace Giropescando.Models
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            throw new NotImplementedException();
+            using (var db = new ModelDbContext())
+            {
+                var user = db.USER.FirstOrDefault(u => u.Username == username);
+                return user != null && user.Ruolo.Equals(roleName, StringComparison.OrdinalIgnoreCase);
+            }
         }
+
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {

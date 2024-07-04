@@ -31,11 +31,12 @@ namespace Giropescando.Models
         public string Username { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         [Display(Name = "Password")]
         public string Pass { get; set; }
 
         public object PasswordHash { get; internal set; }
+        [StringLength(100)]
         public string ConfirmPassword { get; internal set; }
 
         [Required]
